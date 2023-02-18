@@ -8,7 +8,7 @@ import { useState } from 'react'
 
 // }
 
-function QuestionFill(p: QuestionFillData) {
+function QuestionFill(p: FillData) {
 
     return (
         <div className="QuestionFill">

@@ -1,12 +1,12 @@
 /// <reference types="vite/client" />
 
-type QuestionFillData = {
+type FillData = {
     question_prompt: string,
     answers: string[],
     answer: Number,
 }
 
-type QuestionCSData = {
+type CSData = {
     question_prompt: string,
     answers: string[],
     answer: Number,
@@ -14,7 +14,7 @@ type QuestionCSData = {
     language: string
   }
   
-type QuestionQuizData = {
+type QuizData = {
     question_prompt: string,
     answers: string[],
     answer: Number,

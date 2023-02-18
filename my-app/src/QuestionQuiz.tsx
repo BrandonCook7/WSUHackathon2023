@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-function QuestionQuiz(data: QuestionQuizData) {
+function QuestionQuiz(data: QuizData) {
 
     return (
         <div className="QuestionQuiz">
