@@ -1,14 +1,14 @@
 import { useState } from 'react'
 
 
-type Props = {
-    question_prompt: string,
-    answers: string[],
-    answer: Number,
+// type Props = {
+//     question_prompt: string,
+//     answers: string[],
+//     answer: Number,
 
-}
+// }
 
-function QuestionFill(p: Props) {
+function QuestionFill(p: QuestionFillData) {
 
     return (
         <div className="QuestionFill">
@@ -20,7 +20,7 @@ function QuestionFill(p: Props) {
                 <div className="RadioFillButton">
                     {
                         p.answers.map((s,i) => {
-                            return (<label>
+                            return (<label key={i}>
                                 <button>
                                     {s}
                                 </button>

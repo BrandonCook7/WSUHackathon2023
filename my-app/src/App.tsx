@@ -2,25 +2,38 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
 import QuestionFill from './QuestionFill'
+import QuestionCS from './QuestionCS'
 
-type Props = {
-  question_prompt: string,
-  answers: string[],
-  answer: Number,
+// type Props = {
+//   question_prompt: string,
+//   answers: string[],
+//   answer: Number,
+// }
 
-}
 
-let temp: Props = {
-    question_prompt: "What diasdasd",
-    answers: ["hello", "dsd", "jasdsadasddfs"],
-    answer: 2,
-} as Props
+// let temp: Props = {
+//     question_prompt: "What diasdasd",
+//     answers: ["hello", "dsd", "jasdsadasddfs"],
+//     answer: 2,
+// } as Props
 
 function App() {
   const [count, setCount] = useState(0)
-
+  let code_snip = `
+  def bubbleSort(arr):
+      n = len(arr)
+      swapped = False
+      for i in range(n-1):
+          for j in range(0, n-i-1):
+              if arr[j] > arr[j + 1]:
+                  swapped = True
+                  arr[j], arr[j + 1] = arr[j + 1], arr[j]
+          if not swapped:
+              return
+  `
   return (
-    QuestionFill(temp)
+    //<QuestionFill question_prompt={'dsadsad'} answers={["dsadas","ds","asd"]} answer={2}/>
+    <QuestionCS question_prompt={'What is the sorting algorithm'} answers={["Bubble Sort", "Insertion Sort", "Merge Sort"]} answer={2} code_snippet={code_snip} language={'Python'}/>
     // <div className="App">
     //   <div>
     //     <a href="https://vitejs.dev" target="_blank">
