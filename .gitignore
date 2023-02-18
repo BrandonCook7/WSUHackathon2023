@@ -1,5 +1,6 @@
 #React
 *node_modules/*
+package-lock.json
 #Elixir
 /_build
 /cover
