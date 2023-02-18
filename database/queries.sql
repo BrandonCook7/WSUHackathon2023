@@ -14,3 +14,10 @@ VALUES
     (5, 4, 'Object manipluations'),
     (6, 4, 'Higher Order Methods');
 
+INSERT INTO questions (parent_category_order, parent_library_id, question_data)
+VALUES 
+    (6, 4, '{type: "FIB", question_prompt: "const roots = numbers.map((num) ____ Math.sqrt(num));;", answers: ["->","=>",">","return"], correct_answer:1}'),
+    (6, 4, '{type: "FIB", question_prompt: "const filtered: _____ = data.filter((value: number) => value > 5);", answers: ["List","number","List<number>","number[]"], correct_answer:2}'),
+    (6, 4, '{type: "CS",  code_snippet: "pretend there is a code snippet here", question_prompt: "", answers: ["","","",""], correct_answer:0}'),
+    (6, 4, '{type: "CS",  code_snippet: "pretend there is a code snippet here", language: "TypeScript", question_prompt: "", answers: ["","","",""], correct_answer:0}'),
+    (6, 4, '{type: "MC",  question_prompt: "", answers: ["","","",""], correct_answer:'),
