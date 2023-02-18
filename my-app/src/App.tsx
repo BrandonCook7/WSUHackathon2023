@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg'
 import './App.css'
 import QuestionFill from './QuestionFill'
 import QuestionCS from './QuestionCS'
+import QuestionQuiz from './QuestionQuiz'
 
 // type Props = {
 //   question_prompt: string,
@@ -33,7 +34,8 @@ function App() {
   `
   return (
     //<QuestionFill question_prompt={'dsadsad'} answers={["dsadas","ds","asd"]} answer={2}/>
-    <QuestionCS question_prompt={'What is the sorting algorithm'} answers={["Bubble Sort", "Insertion Sort", "Merge Sort"]} answer={2} code_snippet={code_snip} language={'Python'}/>
+    //<QuestionCS question_prompt={'What is the sorting algorithm'} answers={["Bubble Sort", "Insertion Sort", "Merge Sort"]} answer={2} code_snippet={code_snip} language={'Python'}/>
+    <QuestionQuiz question_prompt={'How do you declare a constant'} answers={['const', 'let', 'any']} answer={1}></QuestionQuiz>
     // <div className="App">
     //   <div>
     //     <a href="https://vitejs.dev" target="_blank">

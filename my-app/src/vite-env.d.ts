@@ -6,7 +6,7 @@ type QuestionFillData = {
     answer: Number,
 }
 
-type QuestionCFData = {
+type QuestionCSData = {
     question_prompt: string,
     answers: string[],
     answer: Number,
@@ -14,3 +14,8 @@ type QuestionCFData = {
     language: string
   }
   
+type QuestionQuizData = {
+    question_prompt: string,
+    answers: string[],
+    answer: Number,
+}

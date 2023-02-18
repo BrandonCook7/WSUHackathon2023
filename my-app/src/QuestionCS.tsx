@@ -5,11 +5,7 @@ import './QuestionCS.css'
 
 function QuestionCS(data: QuestionCSData) {
     const codeBlock = '```Python\n' + data.code_snippet + '```'
-    const testmd = '# This is is a header\n\nAnd this is a paragraph'
-    // return (
-    //     //(<ReactMarkdown>{codeBlock}</ReactMarkdown>)
-    //     <ReactMarkdown children={codeBlock} />
-    // )
+
     return (
         <div className="QuestionCS">
             <div className='left'>
