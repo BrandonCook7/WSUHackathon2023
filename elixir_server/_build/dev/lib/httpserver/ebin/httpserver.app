@@ -1,0 +1,10 @@
+{application,httpserver,
+             [{applications,[kernel,stdlib,elixir,logger,plug_cowboy,ecto_sql,
+                             postgrex,uuid]},
+              {description,"httpserver"},
+              {modules,['Elixir.Httpserver','Elixir.Httpserver.Application',
+                        'Elixir.Httpserver.HelloWorldPlug',
+                        'Elixir.Httpserver.Router']},
+              {registered,[]},
+              {vsn,"0.1.0"},
+              {mod,{'Elixir.Httpserver.Application',[]}}]}.
