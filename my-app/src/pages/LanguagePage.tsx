@@ -10,6 +10,7 @@ function LanguagePage() {
 
     const [ session, setSession ] = useState<any>({});
     const [ progress, setProgress ] = useState<any>();
+    const [ languageName, setLanguageName ] = useState<any>("");
 
     useEffect(() => {   
         async function getProgress(user: any) {
@@ -27,14 +28,28 @@ function LanguagePage() {
                 setProgress(data[0].sections_completed);
             }
         }
+        async function getLanguageName() {
+            const { data, error } = await supabase
+                .from("programming_language")
+                .select("*")
+                .eq('language_id', language_id)
+
+            if (error) {
+                console.log(error);
+            } else {
+                console.log("progress")
+                console.log(data[0].language_name);
+                setLanguageName(data[0].language_name);
+            }
+        }
         
           supabase.auth.getUser().then(u => {
             setSession(u.data);
             console.log("user data")
             console.log(u.data)
             getProgress(u.data.user);
+            getLanguageName();
           })
-
           
         }, []);
 
@@ -66,7 +81,7 @@ function LanguagePage() {
 
     return (
         <div className="App">
-            <h1>Learn {params.language}</h1>
+            <h1>Learn {languageName}</h1>
             {categories.map((category, index) => {
                 if (progress + 1 >= category.category_order) {
                     return (
