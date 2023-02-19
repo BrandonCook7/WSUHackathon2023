@@ -66,7 +66,7 @@ function LanguagePage() {
 
     return (
         <div className="App">
-            <h1>The website for {params.language}</h1>
+            <h1>Learn {params.language}</h1>
             {categories.map((category, index) => {
                 if (progress + 1 >= category.category_order) {
                     return (

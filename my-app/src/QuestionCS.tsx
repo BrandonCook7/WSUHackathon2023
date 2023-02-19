@@ -16,7 +16,7 @@ function QuestionCS(data: Props) {
             <div>
                 <h2>{data.CSData.question_prompt}</h2>
             </div>
-            <div className='left'>
+            <div className="question-cs-box">
                 {/* <ReactMarkdown children={codeBlock} remarkPlugins={[remarkGfm]}/> */}
                 <ReactMarkdown remarkPlugins={[[remarkGfm, {singleTilde: false}]]}>
                     {codeBlock}
@@ -26,7 +26,7 @@ function QuestionCS(data: Props) {
             {
                 data.CSData.answers.map((s,i) => {
                     return (<label key={i}>
-                        <button onClick={(e:any) => data.handleInputFunction(e, i)}>
+                         <button className="question-button" onClick={(e:any) => data.handleInputFunction(e, i)}>
                             {s}
                         </button>
                     </label>)

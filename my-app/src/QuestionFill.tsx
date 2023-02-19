@@ -10,16 +10,16 @@ function QuestionFill(p: Props) {
 
     return (
         <div className="QuestionFill">
-            <h1>Fill in the blanks</h1>
+            <h2>Fill in the blanks</h2>
             <div>
-                <h2>{p.fillData.question_prompt}</h2>
+                <h1 className="question-box">{p.fillData.question_prompt}</h1>
             </div>
             <form>
                 <div className="RadioFillButton">
                     {
                         p.fillData.answers.map((s,i) => {
                             return (<label key={i}>
-                                <button onClick={(e:any) => p.handleInputFunction(e, i)}>
+                                <button className="question-button" onClick={(e:any) => p.handleInputFunction(e, i)}>
                                     {s}
                                 </button>
                             </label>)

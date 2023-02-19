@@ -147,8 +147,6 @@ function LanguageCategoryPage() {
 
     return (
         <div className="App">
-            <h1>Category {params.category} for Python</h1>
-            <h1>The website for {params.language}</h1>
             {questionComponent()}
         </div>
     )
