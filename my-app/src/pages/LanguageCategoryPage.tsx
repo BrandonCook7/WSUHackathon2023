@@ -125,11 +125,12 @@ function LanguageCategoryPage() {
             )
         }
         else if (question?.type === "WIN") {
+            recordSuccess()
             return (
                 <div>
-                    <h2>Excellent job!</h2>
-                        <Link to={"/languages/" + language_id} onClick={recordSuccess}>                    
-                            <button>
+                    <h1 className="congrats">Excellent job!</h1>
+                        <Link to={"/languages/" + language_id}>                    
+                            <button className="congrats-button">
                                 return to categories
                             </button>
                         </Link>
