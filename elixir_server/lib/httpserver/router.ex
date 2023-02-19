@@ -1,5 +1,6 @@
 defmodule Httpserver.Router do
   import UUID
+  import JSON
   use Plug.Router
 
   plug :match
@@ -7,17 +8,6 @@ defmodule Httpserver.Router do
   def connect() do
     Postgrex.start_link(hostname: "db.ohjfvruvcrqreevurhdn.supabase.co", username: "postgres", password: "qF72WMU1bJ23hurp", database: "postgres")#{:ok, PID<0.69.0>}
   end
-
-  # {:ok, result} = Postgrex.query(pid, "SELECT * FROM programming_language", [])
-  # case result do
-  #   %Postgrex.Result{columns: columns, rows: rows} ->
-  #     Enum.each(rows, fn row ->
-  #       IO.inspect(row)
-  #     end)
-  #   _ ->
-  #     IO.puts "Unexpected query result format: #{inspect result}"
-  # end
-
 
   get "/" do
     # Get request to localhost 8000
@@ -37,20 +27,38 @@ defmodule Httpserver.Router do
       end)
       |> Enum.map(fn {a, b} -> [a, b] end)
     # Print the results
-    IO.inspect(highest_category_orders)
+    # IO.inspect(highest_category_orders)
 
-    {:ok, result_completed} = Postgrex.query(pid, "SELECT user_id, language_id, sections_completed FROM has_completed", [])
-    IO.inspect(result_completed)
-    #UUID.binary_to_string
-    rows = result_completed.rows#MapSet.new(list2) |> MapSet.subset?(MapSet.new(list1))
-    rows = Enum.filter(rows, fn {_, lang_id, sections_comp} -> Enum.member?(highest_category_orders, [lang_id, sections_comp]) end)
-    #rows = result_completed.rows
-    #new_list = Enum.map(rows, fn {uuid, y, z} -> {UUID.binary_to_string(uuid), y,z} end)
+    {:ok, %{rows: user_results_completed}} = Postgrex.query(pid,
+      "SELECT language_id, sections_completed FROM has_completed WHERE user_id = '#{user_id}'",
+    [])
 
-    IO.inspect(rows)
+    {:ok, %{rows: max_score_for_each_language}} = Postgrex.query(pid,
+      "select parent_library_id, max(category_order) from categories group by parent_library_id",
+    [])
 
+    e1 = Enum.sort_by(user_results_completed, fn [a,b] -> a end)
+    e2 = Enum.sort_by(max_score_for_each_language, fn [a,b] -> a end)
 
-    send_resp(conn, 200, "ID #{user_id}")
+    IO.inspect(e1)
+    IO.inspect(e2)
+
+    badges = Enum.map(Enum.zip(e1, e2),
+      fn {[a,b], [c,d]} -> b >= d end)
+    IO.inspect(badges)
+
+    all_possible_badges = [
+      %{name: "Python", img: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg"},
+      %{name: "JavaScript", img: "https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png"},
+      %{name: "TypeScript", img: "https://upload.wikimedia.org/wikipedia/commons/4/4c/Typescript_logo_2020.svg"},
+      %{name: "C#", img: "https://upload.wikimedia.org/wikipedia/commons/4/4f/Csharp_Logo.png"},
+    ]
+
+    final_data = %{res: Enum.zip(badges, all_possible_badges) |> Enum.filter(fn {succeed, _} -> succeed end) |> Enum.map(fn {_, b} -> b end)}
+    {:ok, res} = JSON.encode(final_data)
+    IO.inspect(res)
+
+    send_resp(conn, 200, res)
   end
 
   get "/:name" do

@@ -12,7 +12,7 @@ defmodule Httpserver.Application do
       {Plug.Cowboy, scheme: :http, plug: Httpserver.HelloWorldPlug, options: [port: 8000]}, #Plug.Conn, Plug.Router
       {Plug.Cowboy, scheme: :http, plug: Httpserver.Router, options: [port: 8001]}, #Plug.Conn, Plug.Router
     ]
-    Logger.info("Running the web serve]r...")
+    Logger.info("Running the web server...")
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: Httpserver.Supervisor]
