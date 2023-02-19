@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { supabase } from "../supabaseClient";
+import "../index.css"
 
 function LandingPage() {
     const [ session, setSession ] = useState<any>({});
@@ -10,19 +11,20 @@ function LandingPage() {
             // console.log(s)
             setSession(s.data)
         })
-
-        //   const getSesssion = async () => {
-        //     const userSession = await supabase.auth.getSession();
-        //     userSession.data
-        //     setSession(userSession.data)
-        //   }
-        //   getSesssion();
-        //   console.log(session)
-        //   supabase.auth.getUser().then(u => console.log(u))
         }, []);
         
     return (
-        <div className="notapp">
+        <div className="navbar">
+            <Link to={"languages"}>
+                <button>Home</button>
+            </Link>
+            <Link to={"languages"}>
+                <button>Profile</button>
+            </Link>
+            <Link to={"login"}>
+                <button>Login</button>
+            </Link>
+
             {/* <h1>Welcome to the website</h1> */}
             <Outlet/>
         </div>

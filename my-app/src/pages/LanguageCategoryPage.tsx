@@ -1,45 +1,9 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import QuestionCS from "../QuestionCS";
 import QuestionFill from "../QuestionFill";
 import QuestionQuiz from "../QuestionQuiz";
 import { supabase } from "../supabaseClient";
-
-
-const tempData = [{
-    type: "FIB",
-    questionPrompt: "What is the ___ in Python",
-    answers: [
-        "Word 1",
-        "Word 2",
-        "Word 3",
-        "Word 4"
-    ],
-    correctAnswer: 1
-},
-{
-    type: "CS",
-    questionPrompt: "Here is a code snippet",
-    answers: [
-        "Word 1",
-        "Word 2",
-        "Word 3",
-        "Word 4"
-    ],
-    correctAnswer: 3
-},
-{
-    type: "MC",
-    questionPrompt: "What is Python?",
-    answers: [
-        "Word 1",
-        "Word 2",
-        "Word 3",
-        "Word 4"
-    ],
-    correctAnswer: 0
-}]
-
 
 function LanguageCategoryPage() {
     let params = useParams();
@@ -48,7 +12,7 @@ function LanguageCategoryPage() {
     let category_id = params.category
 
     const [ questions, setQuestions ] = useState<any>([]);
-    const [ session, setSession ] = useState<any>({});
+    const [ user, setUser ] = useState<any>({});
 
     useEffect(() => {   
         async function getQuestions(language_id: number, category_id: number) {
@@ -67,37 +31,55 @@ function LanguageCategoryPage() {
                 setQuestions(data);
             }
         }
-        getQuestions(Number(language_id), Number(category_id));
-        //   supabase.auth.getUser().then(u => {
-        //     setSession(u.data);
-        //     console.log("user data")
-        //     console.log(u.data)
-        //     getProgress(u.data.user);
-        //   })
-
-          
+        getQuestions(Number(language_id), Number(category_id));   
         }, []);
+
+    const recordSuccess = () => {
+        const updateDB = async (user: any) => {
+            console.log(`${category_id}, ${user.id}, ${language_id}`)
+            const { error } = await supabase
+                .from('has_completed')
+                .update({ sections_completed: category_id })
+                .eq('user_id', user.id)
+                .eq('language_id', language_id)
+        }
+
+        supabase.auth.getUser().then(async (u) => {
+            setUser(u.data);
+            console.log("user data")
+            console.log(u.data.user)
+            await updateDB(u.data.user);
+        })       
+    };
 
     const [ questionIndex, setQuestionIndex ] = useState(0);
 
-    function processAnswer(index: number) {
+    function processAnswer(e: any, index: number) {
+        e.preventDefault();
         console.log(index)
-        if(index === JSON.parse(questions[questionIndex]?.question_data).correct_answer) {
-            setQuestionIndex(questionIndex + 1);
-            if(index === questions.length) {
-                console.log("YOU WIN YOU WIN");
+        
+        if(index === JSON.parse(questions[0]?.question_data).correct_answer) {
+            if (questions.length === 1) {
+                setQuestions([{question_data:'{"type":"WIN"}'}])
             }
+            else{
+                setQuestions(questions.slice(1));
+            }
+        }
+        else {
+            const q = questions[0]
+            setQuestions(questions.concat(q).slice(1))
         }
     }
 
     function questionComponent() {
-        console.log(questions[questionIndex]?.question_data)
-        console.log(`trying to parse, looking at ${questionIndex}`)
+        console.log(questions)
+        console.log(`trying to parse, looking at ${0}`)
         // let question = JSON.parse(questions[questionIndex]?.question_data);
         // let question = JSON.parse(`"${questions[questionIndex]?.question_data.replace('\"','\"').replace('\\', '').replace('“', '\"').replace('”', '\"')}"`);
-        let question = questions[questionIndex]
+        let question = questions[0]
         if (question !== undefined) {
-            question = JSON.parse(questions[questionIndex]?.question_data);
+            question = JSON.parse(questions[0]?.question_data);
         }
         console.log(question);
         if (question?.type === "FIB") {
@@ -121,8 +103,8 @@ function LanguageCategoryPage() {
                             question_prompt:question.question_prompt,
                             answer: question.correct_answer,
                             answers: question.answers,
-                            code_snippet: "",
-                            language: ""
+                            code_snippet: question?.code_snippet,
+                            language: question?.language
                         }
                     } 
                     handleInputFunction={processAnswer} 
@@ -140,6 +122,18 @@ function LanguageCategoryPage() {
                     } 
                     handleInputFunction={processAnswer} 
                 />
+            )
+        }
+        else if (question?.type === "WIN") {
+            return (
+                <div>
+                    <h2>Excellent job!</h2>
+                        <Link to={"/languages/" + language_id} onClick={recordSuccess}>                    
+                            <button>
+                                return to categories
+                            </button>
+                        </Link>
+                </div>
             )
         }
         else {

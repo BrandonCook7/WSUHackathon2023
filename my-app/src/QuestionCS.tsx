@@ -19,14 +19,14 @@ function QuestionCS(data: Props) {
             <div className="question-cs-box">
                 {/* <ReactMarkdown children={codeBlock} remarkPlugins={[remarkGfm]}/> */}
                 <ReactMarkdown remarkPlugins={[[remarkGfm, {singleTilde: false}]]}>
-                {codeBlock}
+                    {codeBlock}
                 </ReactMarkdown>
             </div>
             <div className="RadioFillButton">
             {
                 data.CSData.answers.map((s,i) => {
                     return (<label key={i}>
-                        <button className="question-button" onClick={() => data.handleInputFunction(data.CSData.answer)}>
+                         <button className="question-button" onClick={(e:any) => data.handleInputFunction(e, i)}>
                             {s}
                         </button>
                     </label>)
