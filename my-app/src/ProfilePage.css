@@ -1,0 +1,10 @@
+.element {
+    /* position: absolute;
+    top: 5px;
+    right: 5px; */
+    padding: 30px;
+    transition: 0.4s;
+  }
+.element:hover {
+    transform:scale(1.2, 1.2);
+}
