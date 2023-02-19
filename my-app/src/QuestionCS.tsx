@@ -3,13 +3,18 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm'
 import './Question.css'
 
-function QuestionCS(data: CSData) {
-    const codeBlock = '```Python\n' + data.code_snippet + '```'
+type Props = {
+    CSData: CSData,
+    handleInputFunction: any
+}
+
+function QuestionCS(data: Props) {
+    const codeBlock = '```Python\n' + data.CSData.code_snippet + '```'
 
     return (
         <div className="QuestionCS">
             <div>
-                <h2>{data.question_prompt}</h2>
+                <h2>{data.CSData.question_prompt}</h2>
             </div>
             <div className='left'>
                 {/* <ReactMarkdown children={codeBlock} remarkPlugins={[remarkGfm]}/> */}
@@ -19,9 +24,9 @@ function QuestionCS(data: CSData) {
             </div>
             <div className="RadioFillButton">
             {
-                data.answers.map((s,i) => {
+                data.CSData.answers.map((s,i) => {
                     return (<label key={i}>
-                        <button>
+                        <button onClick={() => data.handleInputFunction(data.CSData.answer)}>
                             {s}
                         </button>
                     </label>)

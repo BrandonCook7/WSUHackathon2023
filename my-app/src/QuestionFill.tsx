@@ -1,27 +1,25 @@
 import { useState } from 'react'
 
 
-// type Props = {
-//     question_prompt: string,
-//     answers: string[],
-//     answer: Number,
+type Props = {
+    fillData: FillData,
+    handleInputFunction: any
+}
 
-// }
-
-function QuestionFill(p: FillData) {
+function QuestionFill(p: Props) {
 
     return (
         <div className="QuestionFill">
             <h1>Fill in the blanks</h1>
             <div>
-                <h2>{p.question_prompt}</h2>
+                <h2>{p.fillData.question_prompt}</h2>
             </div>
             <form>
                 <div className="RadioFillButton">
                     {
-                        p.answers.map((s,i) => {
+                        p.fillData.answers.map((s,i) => {
                             return (<label key={i}>
-                                <button>
+                                <button onClick={() => p.handleInputFunction(p.fillData.answer)}>
                                     {s}
                                 </button>
                             </label>)

@@ -19,3 +19,14 @@ type QuizData = {
     answers: string[],
     answer: Number,
 }
+
+type Question = {
+    questionPrompt: string,
+    answers: string[],
+    correctAnswer: number,
+    type: string
+}
+
+type CodeSnippetQuestion = {
+
+}
