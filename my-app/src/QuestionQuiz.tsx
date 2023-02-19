@@ -9,16 +9,16 @@ function QuestionQuiz(data: Props) {
 
     return (
         <div className="QuestionQuiz">
-            <h1>Choose the correct answer</h1>
+            <h2>Choose the correct answer</h2>
             <div>
-                <h2>{data.quizData.question_prompt}</h2>
+                <h1 className="question-box">{data.quizData.question_prompt}</h1>
             </div>
             <form>
                 <div className="RadioFillButton">
                     {
                         data.quizData.answers.map((s,i) => {
                             return (<label key={i}>
-                                <button onClick={() => data.handleInputFunction(data.quizData.answer)}>
+                                <button className="question-button" onClick={() => data.handleInputFunction(data.quizData.answer)}>
                                     {s}
                                 </button>
                             </label>)
