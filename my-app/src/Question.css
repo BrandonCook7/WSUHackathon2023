@@ -1,8 +1,7 @@
 .question-box {
-  width: 600px;
   border: 5px solid whitesmoke;
-  padding: 275px ;
-  margin: 20px;
+  padding: 200px 275px 200px 275px;
+  margin: 40px 20px 20px 20px;
 }
 
 .question-button {
@@ -23,7 +22,11 @@
 
 .question-cs-box {
   border: 5px solid whitesmoke;
-  padding: 275px ;
-  margin: 20px;
+  padding: 200px 275px 200px 275px;
+  margin: 40px 20px 20px 20px;
   text-align: left;
+}
+
+.markdown-enlarger {
+  font-size: 20px;
 }

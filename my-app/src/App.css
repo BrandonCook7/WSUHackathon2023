@@ -119,7 +119,34 @@
   }
 .language-button:hover {
   /*animation-play-state: running;*/
-  border-color: #2eb82e;
-  color: #d6f5d6;
+  border-color: #6699ff;
+  color: #99bbff;
   transform: scale(1.1, 1.1);
+}
+
+.navbar-buttons {
+  border: 1px solid whitesmoke;
+  border-radius: 6px;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  font-size: 12px;
+  margin: 0px;
+  transition: .2s;
+  position: absolute;
+  top: 10px;
+}
+.navbar-button-home{
+  left:750px;
+}
+.navbar-button-profile{
+  left:807px;
+}
+.navbar-button-login{
+  left:868px;
+}
+.navbar-buttons:hover {
+  border-color: #6699ff;
+  color: #99bbff;
+  transform: scale(1.05, 1.05);
 }

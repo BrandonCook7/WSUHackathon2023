@@ -16,13 +16,13 @@ function LandingPage() {
     return (
         <div className="navbar">
             <Link to={"languages"}>
-                <button>Home</button>
+                <button className="navbar-buttons navbar-button-home">Home</button>
             </Link>
             <Link to={"languages"}>
-                <button>Profile</button>
+                <button className="navbar-buttons navbar-button-profile">Profile</button>
             </Link>
             <Link to={"login"}>
-                <button>Login</button>
+                <button className="navbar-buttons navbar-button-login">Login</button>
             </Link>
 
             {/* <h1>Welcome to the website</h1> */}
