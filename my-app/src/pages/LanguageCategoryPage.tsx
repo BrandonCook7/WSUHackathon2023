@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import QuestionCS from "../QuestionCS";
+import QuestionFill from "../QuestionFill";
+import QuestionQuiz from "../QuestionQuiz";
 
 function LanguageCategoryPage() {
     const [ questions, setQuestions ] = useState([
@@ -57,30 +60,44 @@ function LanguageCategoryPage() {
         console.log(question);
         if (question.type === "FIB") {
             return (
-                <>
-                    <span>FIB</span>
-                    {question.answers.map((answer, index) => {
-                        return <button onClick={() => processAnswer(index)}>{answer}</button>
-                    })}
-                </>
+                <QuestionFill 
+                    fillData={
+                        {
+                            question_prompt:question.questionPrompt,
+                            answer: question.correctAnswer,
+                            answers: question.answers
+                        }
+                    } 
+                    handleInputFunction={processAnswer} 
+                />
             )
         } else if (question.type === "CS") {
             return (
-                <>
-                    <span>CS</span>
-                    {question.answers.map((answer, index) => {
-                        return <button onClick={() => processAnswer(index)}>{answer}</button>
-                    })}
-                </>
-            )
+                <QuestionCS 
+                    CSData={
+                        {
+                            question_prompt:question.questionPrompt,
+                            answer: question.correctAnswer,
+                            answers: question.answers,
+                            code_snippet: "",
+                            language: ""
+                        }
+                    } 
+                    handleInputFunction={processAnswer} 
+                />
+                )
         } else if (question.type === "MC") {
             return (
-                <>
-                    <span>MC</span>
-                    {question.answers.map((answer, index) => {
-                        return <button onClick={() => processAnswer(index)}>{answer}</button>
-                    })}
-                </>
+                <QuestionQuiz 
+                    quizData={
+                        {
+                            question_prompt:question.questionPrompt,
+                            answer: question.correctAnswer,
+                            answers: question.answers
+                        }
+                    } 
+                    handleInputFunction={processAnswer} 
+                />
             )
         }
     }

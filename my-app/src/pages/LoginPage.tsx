@@ -1,6 +1,6 @@
 import { Auth, ThemeSupa } from "@supabase/auth-ui-react";
 import { supabase } from "../supabaseClient";
-import "../app.css";
+import "../App.css";
 
 function LoginPage() {
     supabase.auth.onAuthStateChange((event, session) => {
