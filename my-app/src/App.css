@@ -140,10 +140,10 @@
   left:5px;
 }
 .navbar-button-profile{
-  left:1560px;
+  right:60px;
 }
 .navbar-button-login{
-  left:1621px;
+  right:5px;
 }
 .navbar-buttons:hover {
   border-color: #6699ff;
