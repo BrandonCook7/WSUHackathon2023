@@ -12,3 +12,11 @@ erl_crash.dump
 *.beam
 /config/*.secret.exs
 .elixir_ls/
+
+#Peter
+/bin/
+/include/
+/lib
+/pyvenv.cfg
+/share/
+/src/
