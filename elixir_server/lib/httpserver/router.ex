@@ -2,6 +2,7 @@ defmodule Httpserver.Router do
   import UUID
   import JSON
   use Plug.Router
+  plug Api.CORS
 
   plug :match
   plug :dispatch

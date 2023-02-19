@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid';
+import toString from 'stream-to-string'
 import './ProfilePage.css'
 import { supabase } from './supabaseClient';
 
@@ -47,6 +48,8 @@ function FindAvatar(UserID: string) {
     }
 }
 
+
+
 function ProfilePage() {
     const [ badges, setBadges ] = useState<any[]>([]);
     const [ user, setUser ] = useState<any>();
@@ -54,8 +57,11 @@ function ProfilePage() {
     useEffect( () => {
         async function getBadges(user: any) {
             fetch(`http://localhost:8001/get_badges/${user.id}`)
-                .then((response) => {console.log("response:"); console.log(response); response.json()})
-                .then((data: any) => {setBadges(data)});          
+                .then((response) => {
+                    return response.json();
+                }).then((data) => {
+                    setBadges(data.res);
+                })
         }
         supabase.auth.getUser().then((u:any) => {
             setUser(u.data.user);
@@ -74,7 +80,7 @@ function ProfilePage() {
         <div>
             <div className="QuestionQuiz">
                 <h1>Hi {user?.email.split('.')[0].charAt(0).toUpperCase() + user?.email.split('.')[0].slice(1)}</h1>
-                You have completed {badges.length} courses.
+                You have completed {badges?.length} courses.
             </div>
             <div className="element">
                 <img src={avatar} width="150" height="150"></img>
