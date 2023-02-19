@@ -19,7 +19,7 @@ function QuestionFill(p: Props) {
                     {
                         p.fillData.answers.map((s,i) => {
                             return (<label key={i}>
-                                <button onClick={() => p.handleInputFunction(p.fillData.answer)}>
+                                <button onClick={(e:any) => p.handleInputFunction(e, i)}>
                                     {s}
                                 </button>
                             </label>)

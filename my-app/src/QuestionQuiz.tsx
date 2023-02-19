@@ -18,7 +18,7 @@ function QuestionQuiz(data: Props) {
                     {
                         data.quizData.answers.map((s,i) => {
                             return (<label key={i}>
-                                <button onClick={() => data.handleInputFunction(data.quizData.answer)}>
+                                <button onClick={(e:any) => data.handleInputFunction(e, data.quizData.answer)}>
                                     {s}
                                 </button>
                             </label>)

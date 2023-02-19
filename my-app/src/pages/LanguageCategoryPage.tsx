@@ -80,24 +80,30 @@ function LanguageCategoryPage() {
 
     const [ questionIndex, setQuestionIndex ] = useState(0);
 
-    function processAnswer(index: number) {
+    function processAnswer(e: any, index: number) {
+        e.preventDefault();
         console.log(index)
-        if(index === JSON.parse(questions[questionIndex]?.question_data).correct_answer) {
-            setQuestionIndex(questionIndex + 1);
+        
+        if(index === JSON.parse(questions[0]?.question_data).correct_answer) {
+            setQuestions(questions.slice(1));
             if(index === questions.length) {
                 console.log("YOU WIN YOU WIN");
             }
         }
+        else {
+            const q = questions[0]
+            setQuestions(questions.concat(q).slice(1))
+        }
     }
 
     function questionComponent() {
-        console.log(questions[questionIndex]?.question_data)
-        console.log(`trying to parse, looking at ${questionIndex}`)
+        console.log(questions)
+        console.log(`trying to parse, looking at ${0}`)
         // let question = JSON.parse(questions[questionIndex]?.question_data);
         // let question = JSON.parse(`"${questions[questionIndex]?.question_data.replace('\"','\"').replace('\\', '').replace('“', '\"').replace('”', '\"')}"`);
-        let question = questions[questionIndex]
+        let question = questions[0]
         if (question !== undefined) {
-            question = JSON.parse(questions[questionIndex]?.question_data);
+            question = JSON.parse(questions[0]?.question_data);
         }
         console.log(question);
         if (question?.type === "FIB") {
