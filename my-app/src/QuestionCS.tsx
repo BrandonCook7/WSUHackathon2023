@@ -19,7 +19,7 @@ function QuestionCS(data: Props) {
             <div className='left'>
                 {/* <ReactMarkdown children={codeBlock} remarkPlugins={[remarkGfm]}/> */}
                 <ReactMarkdown remarkPlugins={[[remarkGfm, {singleTilde: false}]]}>
-                {codeBlock}
+                    {codeBlock}
                 </ReactMarkdown>
             </div>
             <div className="RadioFillButton">

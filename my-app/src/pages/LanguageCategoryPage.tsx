@@ -121,8 +121,8 @@ function LanguageCategoryPage() {
                             question_prompt:question.question_prompt,
                             answer: question.correct_answer,
                             answers: question.answers,
-                            code_snippet: "",
-                            language: ""
+                            code_snippet: question?.code_snippet,
+                            language: question?.language
                         }
                     } 
                     handleInputFunction={processAnswer} 
