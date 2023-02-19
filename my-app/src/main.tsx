@@ -14,6 +14,7 @@ import {
 } from "react-router-dom";
 import LanguagePage from './pages/LanguagePage';
 import LanguageCategoryPage from './pages/LanguageCategoryPage';
+import ProfilePage from './ProfilePage';
 // http://localhost:5173/languages/{language : string}/{category : number}/
 
 const router = createBrowserRouter([
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
   {
     path: "login",
     element:  <LoginPage />
+  },
+  {
+    path: "profile",
+    element:  <ProfilePage />
   }
   
 ]);
