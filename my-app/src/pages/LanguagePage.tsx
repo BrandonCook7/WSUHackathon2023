@@ -6,42 +6,80 @@ import { supabase } from "../supabaseClient";
 function LanguagePage() {
     const [ categories, setCategories ] = useState<any[]>([]);
     let params = useParams();
-    const language = params.language || "";
-    console.log(params); // "hotspur"
+    const language_id = params.language || 0;
 
-    const categoriesToNumber : any = {
-        "typescript": 4
-    }
+    const [ session, setSession ] = useState<any>({});
+    const [ progress, setProgress ] = useState<any>();
+
+    useEffect(() => {   
+        async function getProgress(user: any) {
+            const { data, error } = await supabase
+                .from('has_completed')
+                .select('*')
+                .eq('user_id', user.id)
+                .eq('language_id', language_id)
+
+            if (error) {
+                console.log(error);
+            } else {
+                console.log("progress")
+                console.log(data[0].sections_completed);
+                setProgress(data[0].sections_completed);
+            }
+        }
+        
+          supabase.auth.getUser().then(u => {
+            setSession(u.data);
+            console.log("user data")
+            console.log(u.data)
+            getProgress(u.data.user);
+          })
+
+          
+        }, []);
 
     useEffect( () => {
         async function getCategories() {
-            const {data, error} = await supabase
+            /*const {data, error} = await supabase
                 .from("categories")
                 .select("*")
-                .filter("parent_library_id", "eq", categoriesToNumber[language])
+                .filter("parent_library_id", "eq", categoriesToNumber[language])*/
+            
+            const { data, error } = await supabase
+                .from('categories')
+                .select('*')
+                .eq('parent_library_id', Number(language_id))
 
             if (error) {
+                console.log("categories")
                 console.log(error);
             } else {
                 console.log(data);
                 setCategories(data);
             }
-        }
+        }  
+        getCategories();
+        
+    }, [language_id]);
 
-        if(typeof language !== undefined) {
-            getCategories();
-        }
-    }, [language]);
+
 
     return (
         <div className="App">
             <h1>The website for {params.language}</h1>
             {categories.map((category, index) => {
-                return (
-                    <Link to={"/languages/" + language + "/" + (index + 1)}>
+                if (progress + 1 >= category.category_order) {
+                    return (
+                        <Link to={"/languages/" + language_id + "/" + (index + 1)}>
+                            <h3 key={index} >{category?.category_name}</h3>
+                        </Link>
+                    )
+                }
+                else {
+                    return (
                         <h3 key={index} >{category?.category_name}</h3>
-                    </Link>
-                )
+                    )
+                }
             })}
         </div>
     )
