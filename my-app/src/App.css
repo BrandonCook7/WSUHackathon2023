@@ -134,16 +134,16 @@
   margin: 0px;
   transition: .2s;
   position: absolute;
-  top: 10px;
+  top: 5px;
 }
 .navbar-button-home{
-  left:750px;
+  left:5px;
 }
 .navbar-button-profile{
-  left:807px;
+  left:1560px;
 }
 .navbar-button-login{
-  left:868px;
+  left:1621px;
 }
 .navbar-buttons:hover {
   border-color: #6699ff;

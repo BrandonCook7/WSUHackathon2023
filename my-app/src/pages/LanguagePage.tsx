@@ -70,9 +70,11 @@ function LanguagePage() {
             {categories.map((category, index) => {
                 if (progress + 1 >= category.category_order) {
                     return (
-                        <Link to={"/languages/" + language_id + "/" + (index + 1)}>
-                            <button className="category-button" key={index} >{category?.category_name}</button>
-                        </Link>
+                        <div>
+                            <Link to={"/languages/" + language_id + "/" + (index + 1)}>
+                                <button className="category-button" key={index} >{category?.category_name}</button>
+                            </Link>
+                        </div>
                     )
                 }
                 else {
