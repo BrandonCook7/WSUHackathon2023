@@ -1,19 +1,15 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 import './ProfilePage.css'
+import { supabase } from './supabaseClient';
 
-type ProfileData = {
-    FirstName: string,
-    LastName: string,
-    UserID: string,
-}
 
 type CalcData = {
     Badges: Number[],
     CoursesCompleted: Number[],
 }
 
-function hexToDec(s) {
+function hexToDec(s:any) {
     var i, j, digits = [0], carry;
     for (i = 0; i < s.length; i += 1) {
         carry = parseInt(s.charAt(i), 16);
@@ -33,11 +29,8 @@ function hexToDec(s) {
 function FindAvatar(UserID: string) {
     UserID = UserID.replace(/-/g, '');
     UserID = UserID.slice(UserID.length / 2, UserID.length)
-    console.log(UserID)
     var decimal = hexToDec(UserID)
     var value = Math.floor(Number(decimal) / 9999999999999999)
-    console.log(value)
-    console.log(value%6)
     switch (value%6) {
         case 0:
             return "https://cdn-icons-png.flaticon.com/512/3940/3940403.png" //Bear Avatar
@@ -55,23 +48,33 @@ function FindAvatar(UserID: string) {
 }
 
 function ProfilePage() {
+    const [ badges, setBadges ] = useState<any[]>([]);
+    const [ user, setUser ] = useState<any>();
+
+    useEffect( () => {
+        async function getBadges(user: any) {
+            fetch(`http://localhost:8001/get_badges/${user.id}`)
+                .then((response) => {console.log("response:"); console.log(response); response.json()})
+                .then((data: any) => {setBadges(data)});          
+        }
+        supabase.auth.getUser().then((u:any) => {
+            setUser(u.data.user);
+            getBadges(u.data.user);
+        })
+    }, []);
+
     //Mock Data
     let tempCalcData: CalcData = {
         Badges: [2, 3],
         CoursesCompleted: [1],
     }
 
-    let tempProfileData: ProfileData = {
-        FirstName: "Brandon",
-        LastName: "Cook",
-        UserID: "65d380cf-9949-4c39-82c3-93f3a44c6221",
-    }
-    let avatar = FindAvatar(tempProfileData.UserID)
+    let avatar = FindAvatar(user?.id || "efsees")
     return (
         <div>
             <div className="QuestionQuiz">
-                <h1>Hi {tempProfileData.FirstName}</h1>
-                You have completed {tempCalcData.CoursesCompleted.length} courses.
+                <h1>Hi {user?.email.split('.')[0].charAt(0).toUpperCase() + user?.email.split('.')[0].slice(1)}</h1>
+                You have completed {badges.length} courses.
             </div>
             <div className="element">
                 <img src={avatar} width="150" height="150"></img>

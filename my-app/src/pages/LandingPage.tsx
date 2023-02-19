@@ -18,7 +18,7 @@ function LandingPage() {
             <Link to={"languages"}>
                 <button className="navbar-buttons navbar-button-home">Home</button>
             </Link>
-            <Link to={"languages"}>
+            <Link to={"Profile"}>
                 <button className="navbar-buttons navbar-button-profile">Profile</button>
             </Link>
             <Link to={"login"}>
