@@ -34,13 +34,12 @@ CREATE TABLE IF NOT EXISTS questions (
 
 CREATE TABLE IF NOT EXISTS has_completed (
     user_id uuid,
-    category_order bigint,
-    parent_library_id bigint,
+    langauge_id bigint,
     sections_completed bigint DEFAULT 0,
 
-    FOREIGN KEY (category_order, parent_library_id) REFERENCES categories(category_order, parent_library_id) ON DELETE CASCADE,
+    FOREIGN KEY (langauge_id) REFERENCES programming_language(langauge_id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES user_table(user_id) ON DELETE CASCADE,
-    PRIMARY KEY (user_id, category_order)
+    PRIMARY KEY (user_id, langauge_id)
 );
 
 CREATE TABLE IF NOT EXISTS user_ratings (
@@ -80,14 +79,12 @@ language plpgsql
 security definer set search_path = public
 as $$
 DECLARE
-    c record;
-    category_order bigint;
-    parent_library_id bigint;
+    langauge_ids bigint;
 begin
-  FOR c IN SELECT category_order, parent_library_id FROM categories
+  FOR langauge_ids IN SELECT langauge_id FROM programming_language
 	LOOP
-        insert into has_completed (user_id, category_order, parent_library_id)
-        values (new.id, c.category_order, c.parent_category_order);
+        insert into has_completed (user_id, langauge_id)
+        values (new.user_id, langauge_ids);
 	END LOOP;
 end;
 $$;
