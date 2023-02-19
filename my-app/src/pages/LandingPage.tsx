@@ -7,7 +7,7 @@ function LandingPage() {
     useEffect(() => {   
         // Update the document title using the browser API    
         supabase.auth.getSession().then(s => {
-            console.log(s)
+            // console.log(s)
             setSession(s.data)
         })
 
@@ -17,8 +17,8 @@ function LandingPage() {
         //     setSession(userSession.data)
         //   }
         //   getSesssion();
-          console.log(session)
-          supabase.auth.getUser().then(u => console.log(u))
+        //   console.log(session)
+        //   supabase.auth.getUser().then(u => console.log(u))
         }, []);
         
     return (
