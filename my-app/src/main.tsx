@@ -47,29 +47,6 @@ const router = createBrowserRouter([
   }  
 ]);
 
-// const router = createBrowserRouter([
-//   {
-//     path: "/",
-//     element: <SessionContextProvider supabaseClient={supabase}><LandingPage /></SessionContextProvider>,
-//   },
-//   {
-//     path: "/languages",
-//     element: <SessionContextProvider supabaseClient={supabase}></SessionContextProvider><LanguagesPage />,
-//   },
-//   {
-//     path: "/languages/:language",
-//     element: <SessionContextProvider supabaseClient={supabase}></SessionContextProvider><LanguagePage />,
-//   },
-//   {
-//     path: "/languages/:language/:category",
-//     element: <SessionContextProvider supabaseClient={supabase}></SessionContextProvider><LanguageCategoryPage />,
-//   },
-//   {
-//     path: "login",
-//     element:  <SessionContextProvider supabaseClient={supabase}></SessionContextProvider><LoginPage />
-//   }
-// ]);
-
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <RouterProvider router={router} fallbackElement={null} />
