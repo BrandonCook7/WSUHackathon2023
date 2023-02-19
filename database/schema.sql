@@ -72,7 +72,6 @@ create trigger on_auth_user_created
   after insert on auth.users
   for each row execute procedure handle_new_user();
 
-
 -- inserts new rows into has_completed on new user
 create or replace function set_default_values_in_has_completed()
 returns trigger
@@ -96,3 +95,19 @@ $$;
 create trigger on_new_user_in_user_table
   after insert on user_table
   for each row execute procedure set_default_values_in_has_completed();
+
+-- CREATE OR REPLACE FUNCTION add_user_to_has_completed() 
+-- RETURNS TRIGGER 
+-- AS $$
+-- BEGIN
+--   INSERT INTO has_completed (user_id, category_order, parent_library_id)
+--     SELECT NEW.user_id, categories.category_order, categories.parent_library_id
+--       FROM categories;
+--   RETURN NEW;
+-- END;
+-- $$ LANGUAGE plpgsql;
+
+-- CREATE TRIGGER add_user_to_has_completed_trigger
+-- AFTER INSERT ON user_table
+-- FOR EACH ROW
+-- EXECUTE FUNCTION add_user_to_has_completed();
