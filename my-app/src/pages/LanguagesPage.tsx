@@ -23,7 +23,7 @@ function LanguagesPage() {
 
     return (
         <div className="App">
-            <h1 className="language-box rainbow">Learn A New Programming Language With Code Quicky</h1>
+            <h1 className="language-box rainbow">Learn A New Programming Language With Code Lingo</h1>
             {languages.map((language) => {
                 const name = language.language_name;
                 return (
