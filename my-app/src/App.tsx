@@ -28,6 +28,15 @@ function App() {
     // if session === null DO NOT RENDER
   })
 
+  // useEffect(() => {   
+  //   // Update the document title using the browser API    
+  //     const getSesssion = async () => {
+  //       setSession(await supabase.auth.getSession())
+  //     }
+  //     getSesssion();
+  //     console.log(session)
+  //   }, []);
+
   function logOut() {
     supabase.auth.signOut();
   }

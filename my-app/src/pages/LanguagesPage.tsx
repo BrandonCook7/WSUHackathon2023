@@ -4,9 +4,20 @@ import { supabase } from "../supabaseClient";
 
 function LanguagesPage() {
     const [ languages, setLanguages ] = useState<any[]>([]);
+    const [ languageMap, setLanguageMap ] = useState<any[]>([]);
+
+    const [ session, setSession ] = useState<any>({});
+
+    useEffect(() => {   
+        // Update the document title using the browser API    
+          const getSesssion = async () => {
+            setSession(await supabase.auth.getSession())
+          }
+          getSesssion();
+          console.log(session)
+        }, []);
 
     let params = useParams();
-    console.log(params); // "hotspur"
     useEffect( () => {
         async function getLanguages() {
             const {data, error} = await supabase
@@ -22,6 +33,24 @@ function LanguagesPage() {
             }
         }
         getLanguages();
+    }, []);
+
+    useEffect( () => {
+        async function getLanguageMapForUser() {
+            const {data, error} = await supabase
+                .from("has_completed")
+                .select("*")
+                .eq("user_id", session.user.user_id)
+
+            if (error) {
+                console.log(error);
+            } else {
+                console.log("HERE");
+                console.log(data);
+                setLanguageMap(data);
+            }
+        }
+        getLanguageMapForUser();
     }, []);
 
     return (
