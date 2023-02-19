@@ -6,7 +6,7 @@ function LoginPage() {
     supabase.auth.onAuthStateChange((event, session) => {
         console.log(event, session);
         if(event === "SIGNED_IN") {
-            window.location.replace("http://localhost:5173");
+            window.location.replace("http://localhost:5173/languages");
         }
     });
 
