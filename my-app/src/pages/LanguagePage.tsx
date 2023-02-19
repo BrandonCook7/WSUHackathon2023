@@ -15,10 +15,20 @@ function LanguagePage() {
 
     useEffect( () => {
         async function getCategories() {
-            const {data, error} = await supabase
+            /*const {data, error} = await supabase
                 .from("categories")
                 .select("*")
-                .filter("parent_library_id", "eq", categoriesToNumber[language])
+                .filter("parent_library_id", "eq", categoriesToNumber[language])*/
+            
+            const userData = await supabase.auth.getSession();
+            console.log(userData.data.session?.user.id);
+
+            console.log(language);
+            
+            const { data, error } = await supabase
+                .from('categories')
+                .select('language_name, programming_language(*)')
+                .eq('programming_language.language_name', language)
 
             if (error) {
                 console.log(error);
