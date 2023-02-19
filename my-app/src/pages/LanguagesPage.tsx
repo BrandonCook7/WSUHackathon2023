@@ -23,12 +23,12 @@ function LanguagesPage() {
 
     return (
         <div className="App">
-            <h1>Learn A New Programming Language</h1>
+            <h1 className="language-box rainbow">Learn A New Programming Language</h1>
             {languages.map((language) => {
                 const name = language.language_name;
                 return (
                     <Link to={"/languages/" + language.language_id} key={name}>
-                        <button>
+                        <button className="language-button">
                             {name}
                         </button>
                     </Link>
