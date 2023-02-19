@@ -30,3 +30,10 @@
 .markdown-enlarger {
   font-size: 20px;
 }
+
+.markdown code {
+  display: block;
+  white-space: pre-wrap;
+  font-size: 20px;
+  font-family: monospace;
+}

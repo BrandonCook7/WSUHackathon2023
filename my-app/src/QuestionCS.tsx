@@ -1,7 +1,13 @@
-import React, { useState } from 'react'
+import React, { FC, useState } from 'react'
 import ReactMarkdown from 'react-markdown';
+import remarkParse from 'remark-parse'
 import remarkGfm from 'remark-gfm'
+import remarkRehype from 'remark-rehype'
+import 'prismjs/themes/prism.css';
+import Prism from 'prismjs';
+import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism"
 import './Question.css'
+import style from './markdown-styles.module.css';
 
 type Props = {
     CSData: CSData,
@@ -9,7 +15,10 @@ type Props = {
 }
 
 function QuestionCS(data: Props) {
-    const codeBlock = '```' + data.CSData.language + `\n` + data.CSData.code_snippet
+
+
+
+    const codeBlock1 = '```' + data.CSData.language + `\n` + data.CSData.code_snippet
     console.log(data.CSData.code_snippet)
     return (
         <div className="QuestionCS">
@@ -18,9 +27,15 @@ function QuestionCS(data: Props) {
             </div>
             <div className="question-cs-box">
                 {/* <ReactMarkdown children={codeBlock} remarkPlugins={[remarkGfm]}/> */}
-                <ReactMarkdown className="markdown-enlarger" remarkPlugins={[[remarkGfm, {singleTilde: false}]]}>
-                    {codeBlock}
+                {/* <ReactMarkdown
+                    remarkPlugins={[[remarkGfm, { singleTilde: false }]]}
+                    className={style.reactMarkDown}
+                    children={codeBlock1}
+                /> */}
+                <ReactMarkdown className="markdown"  remarkPlugins={[remarkGfm, remarkParse]}>
+                    {codeBlock1}
                 </ReactMarkdown>
+
             </div>
             <div className="RadioFillButton">
             {
@@ -38,3 +53,5 @@ function QuestionCS(data: Props) {
 }
 
 export default QuestionCS
+
+
