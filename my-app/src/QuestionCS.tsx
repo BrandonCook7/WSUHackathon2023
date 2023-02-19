@@ -26,7 +26,7 @@ function QuestionCS(data: Props) {
             {
                 data.CSData.answers.map((s,i) => {
                     return (<label key={i}>
-                        <button onClick={(e:any) => data.handleInputFunction(e, data.CSData.answer)}>
+                        <button onClick={(e:any) => data.handleInputFunction(e, i)}>
                             {s}
                         </button>
                     </label>)
