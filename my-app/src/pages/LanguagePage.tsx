@@ -70,14 +70,18 @@ function LanguagePage() {
             {categories.map((category, index) => {
                 if (progress + 1 >= category.category_order) {
                     return (
-                        <Link to={"/languages/" + language_id + "/" + (index + 1)}>
-                            <h3 key={index} >{category?.category_name}</h3>
-                        </Link>
+                        <div>
+                            <Link to={"/languages/" + language_id + "/" + (index + 1)}>
+                                <button className="category-button" key={index} >{category?.category_name}</button>
+                            </Link>
+                        </div>
                     )
                 }
                 else {
                     return (
-                        <h3 key={index} >{category?.category_name}</h3>
+                        <div>
+                            <button className="category-button-shaded" key={index} >{category?.category_name}</button>
+                        </div>
                     )
                 }
             })}

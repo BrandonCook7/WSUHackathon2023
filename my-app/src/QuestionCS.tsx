@@ -9,8 +9,8 @@ type Props = {
 }
 
 function QuestionCS(data: Props) {
-    const codeBlock = '```Python\n' + data.CSData.code_snippet + '```'
-
+    const codeBlock = '```' + data.CSData.language + `\n` + data.CSData.code_snippet
+    console.log(data.CSData.code_snippet)
     return (
         <div className="QuestionCS">
             <div>
@@ -18,7 +18,7 @@ function QuestionCS(data: Props) {
             </div>
             <div className="question-cs-box">
                 {/* <ReactMarkdown children={codeBlock} remarkPlugins={[remarkGfm]}/> */}
-                <ReactMarkdown remarkPlugins={[[remarkGfm, {singleTilde: false}]]}>
+                <ReactMarkdown className="markdown-enlarger" remarkPlugins={[[remarkGfm, {singleTilde: false}]]}>
                     {codeBlock}
                 </ReactMarkdown>
             </div>
