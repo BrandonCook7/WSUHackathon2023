@@ -152,19 +152,15 @@
 }
 
 .badge-image {
-  padding: 100px 10px 10px 10px;
+  padding: 10px 10px 10px 10px;
   transition: .4s;
 }
 .badge-image:hover {
-
-  transform: scale(1.1, 1.1)
+  transform: scale(1.2, 1.2)
 }
 
 .badge-name {
-  padding: 100px 10px 10px 10px;
+  padding: 5px;
   transition: .4s;
-  font-size: .000002px;
-}
-.badge-name:hover {
-  transform: scale(10000000, 10000000);
+  font-size: 30px;
 }

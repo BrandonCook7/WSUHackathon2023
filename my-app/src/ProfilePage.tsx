@@ -69,7 +69,7 @@ function ProfilePage() {
         })
     }, []);
 
-    let badge_loaded = JSON.parse(badges)
+    let badge_loaded = badges
     //Mock Data
     let tempCalcData: CalcData = {
         Badges: [2, 3],
@@ -86,10 +86,14 @@ function ProfilePage() {
             <div className="element">
                 <img src={avatar} width="150" height="150"></img>
             </div>
-            {badge_loaded.map(image, name) => {
-                <img className="badge-image" src={image}></img>
-                <h1 className="badge-name">name</h1>
-            }}
+            {badges.map((p: any) => {
+                return (
+                    <div>
+                        <img className="badge-image" width="100" height="100" src={p.img}/>
+                        <h2 className="badge-name">{p.name}</h2>
+                    </div>
+                )
+            }) }
         </div>
     )
 }
