@@ -71,13 +71,15 @@ function LanguagePage() {
                 if (progress + 1 >= category.category_order) {
                     return (
                         <Link to={"/languages/" + language_id + "/" + (index + 1)}>
-                            <h3 key={index} >{category?.category_name}</h3>
+                            <button className="category-button" key={index} >{category?.category_name}</button>
                         </Link>
                     )
                 }
                 else {
                     return (
-                        <h3 key={index} >{category?.category_name}</h3>
+                        <div>
+                            <button className="category-button-shaded" key={index} >{category?.category_name}</button>
+                        </div>
                     )
                 }
             })}
